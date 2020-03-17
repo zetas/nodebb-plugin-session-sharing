@@ -32,7 +32,7 @@ var plugin = {
 			'payload:firstName': 'firstName',
 			'payload:lastName': 'lastName',
 			'payload:picture': 'picture',
-			'payload:parent': undefined
+			'payload:parent': 'data'
 		}
 	};
 
