@@ -325,11 +325,10 @@ plugin.addMiddleware = function(req, res, next) {
 	if (
 		!plugin.ready ||	// plugin not ready
 		(plugin.settings.behaviour === 'trust' && hasSession) ||	// user logged in + "trust" behaviour
-		(plugin.settings.behaviour === 'revalidate' && hasLoginLock || 
-		req.originalUrl.startsWith(nconf.get('relative_path') + '/api'))
+		(plugin.settings.behaviour === 'revalidate' && hasLoginLock)
 	) {
 		// Let requests through under "revalidate" behaviour only if they're logging in for the first time
-		delete req.session.loginLock;	// remove login lock for "revalidate" logins
+		// delete req.session.loginLock;	// remove login lock for "revalidate" logins
 
 		return next();
 	} else {
@@ -372,6 +371,7 @@ plugin.addMiddleware = function(req, res, next) {
 				winston.verbose('[session-sharing] Processing login for uid ' + uid + ', path ' + req.originalUrl);
 				req.uid = uid;
 				nbbAuthController.doLogin(req, uid, function () {
+					winston.verbose('[session-sharing] Logging in uid:' + uid);
 					req.session.loginLock = true;
 					res.redirect(req.originalUrl);
 				});
