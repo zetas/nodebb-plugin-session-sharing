@@ -129,7 +129,7 @@ plugin.verifyToken = function(payload, callback) {
 		lastName = parent ? payload[parent][plugin.settings['payload:lastName']] : payload[plugin.settings['payload:lastName']];
 
 	if (!id || (!username && !firstName && !lastName)) {
-		winston.verbose('[session-sharing] Unable to parse payload: ' +payload);
+		winston.verbose('[session-sharing] Unable to parse payload: ',payload);
 		return callback(new Error('payload-invalid'));
 	}
 
