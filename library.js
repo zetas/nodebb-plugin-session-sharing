@@ -131,6 +131,7 @@ plugin.verifyToken = function(payload, callback) {
 	if (!id || (!username && !firstName && !lastName)) {
 		winston.verbose('[session-sharing] Unable to parse payload: ',payload);
 		winston.verbose('[session-sharing] None of these are set:',parent, id, username, firstName, lastName);
+		winston.verbose('[session-sharing] Plugin settings:', plugin.settings);
 		return callback(new Error('payload-invalid'));
 	}
 
