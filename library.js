@@ -129,7 +129,8 @@ plugin.verifyToken = function(payload, callback) {
 		lastName = parent ? payload[parent][plugin.settings['payload:lastName']] : payload[plugin.settings['payload:lastName']];
 
 	if (!id || (!username && !firstName && !lastName)) {
-		winston.verbose('[session-sharing] Unable to parse payload: ',payload, payload['username']);
+		console.log(payload);
+		winston.verbose('[session-sharing] Unable to parse payload: ', payload['username']);
 		winston.verbose('[session-sharing] None of these are set:',parent, id, username, firstName, lastName);
 		winston.verbose('[session-sharing] Plugin settings:', plugin.settings);
 		winston.verbose('[session-sharing] What the actual fuck: ', payload[plugin.settings['payload:id']],payload[plugin.settings['payload:username']],payload[plugin.settings['payload:firstName']], payload[plugin.settings['payload:lastName']]);
